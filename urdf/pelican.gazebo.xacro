@@ -6,6 +6,7 @@
     <xacro:include filename="$(find pelican_description)/urdf/motor_controller.gazebo.xacro" />
     <xacro:include filename="$(find pelican_description)/urdf/asus_xtion_pro.urdf.xacro" />
     
+    <pelican_base_macro />
     <pelican_controller />
     <sensor_asus_xtion_pro parent="pelican"/>
   

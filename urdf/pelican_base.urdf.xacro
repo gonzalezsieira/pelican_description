@@ -1,56 +1,39 @@
 <?xml version="1.0"?>
-<robot name="pelican" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <link name="base_footprint">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="0 0 0"/>
-      </geometry>
-    </collision>
-  </link>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- Footprint of the main link -->
-  <joint name="pelican_link_to_base_footprint" type="fixed">
-    <parent link="pelican"/>
-    <child link="base_footprint"/>
-    <origin xyz="0.00 0.00 -0.195" rpy="0 0 0"/>
-  </joint>
+  <xacro:property name="pi" value="3.1415926535897931" />
 
   <!-- Main quadrotor link -->
-  <link name="pelican">
-      <visual>
-	<origin xyz="0.0 0.0 0.0" rpy="1.57 0.0 3.1415"/>
-	<geometry>
-	  <mesh filename="package://pelican_description/meshes/pelican.stl"
-		scale="0.001 0.001 0.001"/>
-	</geometry>
-      </visual>
-      <collision>
-	<origin xyz="0.0 0.0 0.0" rpy="1.57 0.0 3.1415"/>
-	<geometry>
-	  <mesh filename="package://pelican_description/meshes/pelican.stl"
-		scale="0.001 0.001 0.001"/>
-	</geometry>
-      </collision>
-  </link>
-  
-  <link name="pelican_inertia">
-    <inertial>
-	<mass value="1.4699013" />
+  <xacro:macro name="pelican_base_macro">
+    <link name="pelican">
+      <inertial>
+        <origin xyz="0 0 0" />
+        <mass value="1.4699013" />
 	<inertia  ixx="0.0031887" ixy="-0.0000038"  ixz="-0.0000881" iyx="-0.0000038" iyy="0.0032245"  iyz="0.0000846" izx="-0.0000881" izy="0.0000846" izz="0.0013857" />
       </inertial>
-  </link>
-  
-  <joint name="pelican_inertia_joint" type="fixed">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="pelican" />
-      <child link="pelican_inertia" />
-  </joint>
-  
-  <gazebo reference="pelican">
-    <material>Gazebo/Black</material>
-    <turnGravityOff>false</turnGravityOff>
-  </gazebo>
 
+      <visual>
+        <origin xyz="0 0 0" rpy="1.57 0.0 3.1415" />
+        <geometry>
+	  <mesh filename="package://pelican_description/meshes/pelican.stl"
+		scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="1.57 0.0 3.1415" />
+        <geometry>
+	  <mesh filename="package://pelican_description/meshes/pelican.stl"
+		scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+   <gazebo reference="pelican">
+     <material>Gazebo/Black</material>
+     <turnGravityOff>false</turnGravityOff>
+   </gazebo>
+
+  </xacro:macro>
 </robot>
